@@ -93,9 +93,9 @@ public class ChatService {
 							String xml =c.iterator().next().toXML().toString();
 							String[] invite = XmlTool.inviteXml(xml);
 							System.out.println("\n"+invite[0]+"邀请你加入:"+message.getFrom().split("/")[0]+"\n"+"邀请理由:"+invite[1]);
-						//普通消息包
+						//普通消息包（//TODO未处理离线消息）
 						} else{
-							System.out.println("\n#" + message.getFrom().split("/")[0] +" \n"+ messageBody);
+							System.out.println("\n" + message.getFrom().split("/")[0] +" "+DataTool.getNowtime()+" \n"+ messageBody);
 						}	
 				
 						}

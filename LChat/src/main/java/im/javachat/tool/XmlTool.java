@@ -13,6 +13,10 @@ import org.dom4j.Element;
  * 解析XML信息
  * */
 public class XmlTool {
+	
+	/**
+	 * 解析聊天是的邀请信息 
+	 * */
 	public static String[] inviteXml(String xml){
 		//invite[0]邀请人 invite[1]邀请理由
 		String[] invite = new String[2];
@@ -29,9 +33,21 @@ public class XmlTool {
 		return invite;
 	}
 	
+	public static void pre(String xml){
+		try {
+			Document document = DocumentHelper.parseText(xml);
+			Element root = document.getRootElement();
+			//System.out.println(root.gete);
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
-		String xml = "<x xmlns='http://jabber.org/protocol/muc#user'><invite  from='666@localhost.localdomain/Smack'>"
-				+ "<reason>comeon</reason></invite></x>";
-		XmlTool.inviteXml(xml);
+		String xml = "<message id='r0VV4-4' to='test@localhost.localdomain' from='111@localhost.localdomain/Smack' type='chat'>"
+				+ "<body>nihao</body> <thread>cc10087f-2947-4df4-b9e7-2cdadcf69ecb</thread><delay xmlns='urn:xmpp:delay' "
+				+ "stamp='2015-01-19T16:35:11.999Z' from='localhost.localdomain'>Offline Storage - localhost</delay></message>";
+		XmlTool.pre(xml);
 	}
 }
