@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import im.javachat.service.GlobalVar.GlobalVar;
-import im.javachat.tool.DataTool;
+import im.javachat.tool.DateTool;
 import im.javachat.tool.XmlTool;
 
 import org.jivesoftware.smack.Chat;
@@ -34,7 +34,7 @@ public class ChatService {
 						@Override
 						public void processMessage(Chat chat, Message message) {
 							String messageBody = message.getBody();
-								System.out.println("\n"+message.getFrom().split("/")[0]+" "+ DataTool.getNowtime()+"\n" + messageBody);
+								System.out.println("\n"+message.getFrom().split("/")[0]+" "+ DateTool.getNowtime()+"\n" + messageBody);
 						}
 					}));
 		}
@@ -71,7 +71,7 @@ public class ChatService {
 		
 		//输入消息
 		Chat chat = GlobalVar.hashchat.get(friendjid);
-		chat.sendMessage(DataTool.getNowtime()+GlobalVar.MESSAGEDELIMITER+message);
+		chat.sendMessage(DateTool.getNowtime()+GlobalVar.MESSAGEDELIMITER+message);
 		chat.close();
 	}
 
@@ -95,7 +95,7 @@ public class ChatService {
 							System.out.println("\n"+invite[0]+"邀请你加入:"+message.getFrom().split("/")[0]+"\n"+"邀请理由:"+invite[1]);
 						//普通消息包（//TODO未处理离线消息）
 						} else{
-							System.out.println("\n" + message.getFrom().split("/")[0] +" "+DataTool.getNowtime()+" \n"+ messageBody);
+							System.out.println("\n" + message.getFrom().split("/")[0] +" "+DateTool.getNowtime()+" \n"+ messageBody);
 						}	
 				
 						}

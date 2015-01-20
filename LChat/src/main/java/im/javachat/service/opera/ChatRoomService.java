@@ -1,7 +1,8 @@
 package im.javachat.service.opera;
 
 import im.javachat.service.GlobalVar.GlobalVar;
-import im.javachat.tool.DataTool;
+import im.javachat.service.command.InputCommand;
+import im.javachat.tool.DateTool;
 import im.javachat.tool.StringTool;
 
 import java.util.Iterator;
@@ -54,12 +55,16 @@ public class ChatRoomService {
 	 * 加入聊天室,可以加入多个聊天室，只是接受该聊天室的消息，不进行消息发送
 	 * @param roomName 聊天室名称
 	 * */
-	public void joinRoom(String roomName){
+	public void joinRoom(String ...roomName){
 		try {
-			MultiUserChat muc = new MultiUserChat(GlobalVar.connection, roomName);
+			if(roomName.length!=2){
+				InputCommand.printerrorcommand();
+				return;
+			} 
+			MultiUserChat muc = new MultiUserChat(GlobalVar.connection, roomName[1]);
 			if(!muc.isJoined()){
 				muc.join(GlobalVar.userjid);//用jid作为昵称加入聊天室
-				GlobalVar.chatroom.put(roomName, muc);
+				GlobalVar.chatroom.put(roomName[1], muc);
 				listenRoomMessage(muc);
 			}
 		} catch (NoResponseException e) {
@@ -145,9 +150,11 @@ public class ChatRoomService {
 					Message m = (Message)packet;
 					String[] message = m.getFrom().split("@");
 					//过滤自己发送的消息
-					if(!message[1].split("/")[1].equals(GlobalVar.userjid.split("@")[0])){
-							System.out.println(message[1].split("/")[1]+" "+DataTool.getNowtime()+"\n"+
+					if(message[1].split("/").length>1){
+						if(!message[1].split("/")[1].equals(GlobalVar.userjid.split("@")[0])){
+							System.out.println(message[1].split("/")[1]+" "+DateTool.getNowtime()+"\n"+
 									StringTool.StrtoUTF8(m.getBody()));
+						}
 					}
 				}
 			}

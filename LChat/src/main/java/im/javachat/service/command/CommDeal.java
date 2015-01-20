@@ -29,7 +29,7 @@ public class CommDeal {
 			break;
 		// 进入目录
 		case "cd":
-			DirectoryControll.pushDirectory(comm[1]);
+			DirectoryControll.pushDirectory(comm);
 			break;
 		// 显示当前目录
 		case "pwd":
@@ -41,19 +41,15 @@ public class CommDeal {
 			break;
 		//添加好友	
 		case "add":
-			if(comm.length == 2){
-				FriendControll.addFriend(comm[1],comm[2], comm[3]);
-			}else{
-				System.out.println("command is error,help check it");
-			}
+			FriendControll.addFriend(comm);
 			break;
 		case "rm":
 		case "remove":
-			FriendControll.removeFriend(comm[1]);
+			FriendControll.removeFriend(comm);
 			break;
 		// 发送消息
 		case "send":
-			new ChatControll().sendMessage(comm[2],comm[1]);
+			new ChatControll().sendMessage(comm);
 			break;
 		case "exit":
 			new LoginService().loginout();
@@ -61,36 +57,28 @@ public class CommDeal {
 			break;
 		//加入聊天室	
 		case "join":
-			new ChatRoomService().joinRoom(comm[1]);
+			if(comm.length==2)
+			new ChatRoomService().joinRoom(comm);
 			break;
 		//创建聊天室
 		case "create":
-			System.out.println(comm.length);
-			if(comm.length==3)
-				new ChatRoomControll().createRoom(comm[1], comm[2]);
+				new ChatRoomControll().createRoom(comm);
 			break;
 		//将指定用户踢出聊天室	
 		case "ban":
-			if(comm.length == 2)
-				new ChatRoomControll().banUser(comm[1], comm[2]);
-			else
-				System.out.println("command's parameter is error");
+				new ChatRoomControll().banUser(comm);
 			break;
 		//邀请好友
 		case "invite":
-			if(comm.length>3)
-				new ChatRoomControll().inviteUser(comm[1], comm[2],comm[3]);
+				new ChatRoomControll().inviteUser(comm);
 			break;
 		//处理好友添加请求	
 		case "deal":
-			if(comm.length==2){
-				new FriendService().dealPresence(comm[1],comm[2]);
-			}else{
-				System.out.println("command's parameter is error");
-			}
+				new FriendControll().dealPresence(comm);
 			break;
 		case "leave":
-			new ChatRoomControll().leaveRoom(comm[1]);
+			if(comm.length==2)
+				new ChatRoomControll().leaveRoom(comm);
 			break;
 		// 错误输入
 		default:

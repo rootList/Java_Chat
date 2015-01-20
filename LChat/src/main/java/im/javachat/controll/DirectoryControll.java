@@ -3,6 +3,7 @@ package im.javachat.controll;
 import java.util.TreeSet;
 
 import im.javachat.service.GlobalVar.GlobalVar;
+import im.javachat.service.command.InputCommand;
 import im.javachat.service.opera.ChatRoomService;
 import im.javachat.service.opera.DirectoryService;
 
@@ -18,40 +19,44 @@ public class DirectoryControll {
 	 * 3、向栈中添加目录结构
 	 * @param directoryname 目录名称
 	 * */
-	public static boolean pushDirectory(String  directoryname){
+	public static void pushDirectory(String  ...directoryname){
+		//判断参数
+		if(directoryname.length!=2){
+			InputCommand.printerrorcommand();
+			return;
+		}
 		//==========1
 		String nowdirectory = GlobalVar.directory.getDirecStack().lastElement();
 		TreeSet<String> tree = GlobalVar.directory.getHashfile().get(nowdirectory);
 		//==============2
-		if(directoryname.equals("..")){
+		if(directoryname[1].equals("..")){
 			if(GlobalVar.directory.getDirecStack().size()>1)
 				popDirectory();
 			else{ 
 				System.out.println("It's a last directory");
-				return false;
+				return;
 				}
 		//===========3	
 		}else if(tree==null){
-			return false;
+			return;
 		}
-		else if(!tree.contains(directoryname)){
-			System.out.println("no such a directory is "+directoryname);
+		else if(!tree.contains(directoryname[1])){
+			System.out.println("no such a directory is "+directoryname[1]);
 		}else{
-			GlobalVar.directory.getDirecStack().push(directoryname);
+			GlobalVar.directory.getDirecStack().push(directoryname[1]);
 			//进入聊天室目录
-			if(directoryname.equals("chatroom")){
+			if(directoryname[1].equals("chatroom")){
 				ChatRoomService.showRooms();
 			//进入指定的聊天室
-			}else if(directoryname.contains("@muc")){
+			}else if(directoryname[1].contains("@muc")){
 				new ChatRoomControll().entryChatRoom();
 			//如果进入好友目录目录
-			}else if(directoryname.contains("@")){
+			}else if(directoryname[1].contains("@")){
 				new ChatControll().createchat();
 			}
 			
-			
 		}
-		return true;
+		return;
 	}
 	
 	/**

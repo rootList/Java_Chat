@@ -36,7 +36,21 @@ public class InputCommand {
 	/** 
 	 * 輸出
 	 * */
-	public void print(String show){
+	public static void print(String show){
 		System.out.println(show);
+	}
+	
+	/**
+	 * 参数不合法时输出提示信息
+	 * */
+	public static void printerrorcommand(){
+		System.out.println("command is error,help check it");
+	}
+	
+	/**
+	 * jid不合法时输出提示信息
+	 * */
+	public static void printerrorjid(){
+		System.out.println("command is error,help check it");
 	}
 }

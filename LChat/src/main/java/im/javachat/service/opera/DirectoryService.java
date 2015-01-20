@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import im.javachat.service.GlobalVar.GlobalVar;
-import im.javachat.tool.DataTool;
+import im.javachat.tool.DateTool;
 
 /**
  * 目录服务层
@@ -52,7 +52,7 @@ public class DirectoryService {
 	 * @param value 需要搜索的目录
 	 * */
 	public void initDirectory(HashMap<Object, Object> hashMap,Object value){
-		List<Object> list =	DataTool.HashValueToKey(hashMap, value);
+		List<Object> list =	DateTool.HashValueToKey(hashMap, value);
 		
 		if(list!=null){
 		TreeSet<String> file = new TreeSet<String>();

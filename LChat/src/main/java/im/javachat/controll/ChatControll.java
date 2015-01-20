@@ -1,8 +1,10 @@
 package im.javachat.controll;
 
 import im.javachat.service.GlobalVar.GlobalVar;
+import im.javachat.service.command.InputCommand;
 import im.javachat.service.opera.ChatService;
-import im.javachat.tool.DataTool;
+import im.javachat.tool.DateTool;
+import im.javachat.tool.StringTool;
 
 import org.apache.commons.lang.StringUtils;
 import org.jivesoftware.smack.PacketListener;
@@ -35,14 +37,19 @@ public class ChatControll {
 	 * 发送聊天消息给指定用户
 	 * @param friendjid 完整的jid信息
 	 * */
-	public void sendMessage(String friendjid,String message){
-		if(StringUtils.isEmpty(friendjid)||StringUtils.isEmpty(message)){
-			System.out.println("input error,command is not entire!");
+	public void sendMessage(String ...comm){
+		if(comm.length!=3){
+			InputCommand.printerrorcommand();
+			return;
+		}
+		if(!StringTool.verifyJid(comm[2])){
+			InputCommand.printerrorjid();
+			return;
 		}
 		try {
-			Message messagep = new Message(friendjid,Type.chat);
+			Message messagep = new Message(comm[1],Type.chat);
 			messagep.setFrom(GlobalVar.userjid);
-			messagep.setBody(message);
+			messagep.setBody(comm[2]);
 			GlobalVar.connection.sendPacket(messagep);
 		} catch (NotConnectedException e) {
 			System.out.println("Connection error");

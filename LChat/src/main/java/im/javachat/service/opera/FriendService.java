@@ -81,10 +81,6 @@ public class FriendService {
 	 * @throws NotLoggedInException 
 	 * */
 	public static void addfriend(String friendjid,String remarkNick,String group) throws NotLoggedInException, NoResponseException, XMPPErrorException, NotConnectedException{
-	   if(StringUtils.isEmpty(friendjid)||StringUtils.isEmpty(group)){
-		   System.out.println("friendjid is null!");
-		   return;
-	   }
 	   //备注昵称为空，则以jid替代
 	   if(StringUtils.isEmpty(remarkNick)){
 		   remarkNick = friendjid;
