@@ -1,7 +1,6 @@
 package im.javachat.controll;
 
 
-import org.apache.commons.lang.StringUtils;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
 import org.jivesoftware.smack.SmackException.NotLoggedInException;

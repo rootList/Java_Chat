@@ -12,7 +12,7 @@ public class ImServiceMain {
 	public static void main(String[] args) {
 		new LoginControll().login();
 		PresenceService.listeningPresence();//开启状态监听线程
-		ChatService.listeningMssage();//开启消息监听线程
+	//	ChatService.listeningMssage();//开启消息监听线程
 		FriendService.init();//登陆后初始化好友列表
 	//	ChatRoomPackService.InvitationListener();
 		new Thread(new Command()).start();

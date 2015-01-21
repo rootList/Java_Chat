@@ -114,9 +114,7 @@ public class ChatRoomService {
 	public void createRoom(String roomName,String roomNickname){
 		try {
 			MultiUserChat muc = new MultiUserChat(GlobalVar.connection, roomName+"@muc."+GlobalVar.service.getProperty("servicename"));
-			//没有设置聊天室名称时用jid前缀代替
-			if(roomNickname==null)
-				roomNickname = roomName;
+			
 			 muc.create(GlobalVar.userjid);
 			 //根据原表单创建需要提交的表单
 			 Form form = muc.getConfigurationForm();
@@ -127,6 +125,8 @@ public class ChatRoomService {
 					submitForm.setDefaultAnswer(field.getVariable());
 				}
 			}
+			//submitForm.setAnswer("muc#roomconfig_persistentroom", true);
+			submitForm.setAnswer("muc#roomconfig_roomname", roomNickname);
 			muc.sendConfigurationForm(submitForm); 
 			listenRoomMessage(muc);
 			GlobalVar.chatroom.put(muc.getRoom(), muc);
@@ -149,7 +149,7 @@ public class ChatRoomService {
 				if(packet instanceof Message){
 					Message m = (Message)packet;
 					String[] message = m.getFrom().split("@");
-					//过滤自己发送的消息
+					//过滤自己在聊天室发送的消息
 					if(message[1].split("/").length>1){
 						if(!message[1].split("/")[1].equals(GlobalVar.userjid.split("@")[0])){
 							System.out.println(message[1].split("/")[1]+" "+DateTool.getNowtime()+"\n"+

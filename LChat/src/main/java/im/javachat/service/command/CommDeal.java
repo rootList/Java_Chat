@@ -6,6 +6,7 @@ import im.javachat.controll.DirectoryControll;
 import im.javachat.controll.FriendControll;
 import im.javachat.controll.HelpControll;
 import im.javachat.service.opera.ChatRoomService;
+import im.javachat.service.opera.ChatService;
 import im.javachat.service.opera.FriendService;
 import im.javachat.service.opera.LoginService;
 
@@ -57,7 +58,6 @@ public class CommDeal {
 			break;
 		//加入聊天室	
 		case "join":
-			if(comm.length==2)
 			new ChatRoomService().joinRoom(comm);
 			break;
 		//创建聊天室
@@ -79,6 +79,9 @@ public class CommDeal {
 		case "leave":
 			if(comm.length==2)
 				new ChatRoomControll().leaveRoom(comm);
+			break;
+		case "test":
+			new ChatService().test();
 			break;
 		// 错误输入
 		default:

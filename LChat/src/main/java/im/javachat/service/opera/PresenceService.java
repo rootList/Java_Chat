@@ -1,6 +1,7 @@
 package im.javachat.service.opera;
 
 import im.javachat.service.GlobalVar.GlobalVar;
+import im.javachat.service.command.InputCommand;
 
 import java.util.TreeSet;
 
@@ -46,7 +47,7 @@ public class PresenceService {
 				XMPPConnection connection = GlobalVar.connection;
 				// 对方发出添加好友请求
 				if (presence.getType().equals(Presence.Type.subscribe)) {
-					GlobalVar.input.print("\n"+presence.getFrom() + ":添加你为好友,请到/presence下进行处理");
+					InputCommand.print("\n"+presence.getFrom() + ":添加你为好友,请到/presence下进行处理");
 					// 将请求加入到队列中，等待处理
 					GlobalVar.peQueue.addPresence(presence);
 					//更改目录presence下的文件

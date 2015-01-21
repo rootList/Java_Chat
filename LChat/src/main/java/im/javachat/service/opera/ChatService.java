@@ -4,6 +4,7 @@ package im.javachat.service.opera;
 import java.util.Collection;
 import java.util.Date;
 
+import im.javachat.entity.MyMessage;
 import im.javachat.service.GlobalVar.GlobalVar;
 import im.javachat.tool.DateTool;
 import im.javachat.tool.XmlTool;
@@ -113,4 +114,17 @@ public class ChatService {
 		//muc.addUserStatusListener(listener);
 	}
 	
+	public void test(){
+		try {
+			/*Message me= new Message();
+			me.setBody("123");
+			me.setFrom("111@localhost.localdomain");
+			me.setTo("test@localhost.localdomain");
+			me.s*/
+			GlobalVar.connection.sendPacket(new MyMessage());
+		} catch (NotConnectedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
