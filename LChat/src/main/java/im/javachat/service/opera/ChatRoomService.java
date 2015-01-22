@@ -55,16 +55,13 @@ public class ChatRoomService {
 	 * 加入聊天室,可以加入多个聊天室，只是接受该聊天室的消息，不进行消息发送
 	 * @param roomName 聊天室名称
 	 * */
-	public void joinRoom(String ...roomName){
+	public void joinRoom(String roomName){
 		try {
-			if(roomName.length!=2){
-				InputCommand.printerrorcommand();
-				return;
-			} 
-			MultiUserChat muc = new MultiUserChat(GlobalVar.connection, roomName[1]);
+			
+			MultiUserChat muc = new MultiUserChat(GlobalVar.connection, roomName);
 			if(!muc.isJoined()){
 				muc.join(GlobalVar.userjid);//用jid作为昵称加入聊天室
-				GlobalVar.chatroom.put(roomName[1], muc);
+				GlobalVar.chatroom.put(roomName, muc);
 				listenRoomMessage(muc);
 			}
 		} catch (NoResponseException e) {
@@ -94,7 +91,7 @@ public class ChatRoomService {
 		}
 		
 		String message = GlobalVar.input.chatscanner();
-		while(!message.equals("quit")){
+		while(message!=null&&!message.equals("quit")){
 				muc.sendMessage(StringTool.StrtoUTF8(message));
 				message = GlobalVar.input.chatscanner();
 		}
@@ -214,4 +211,12 @@ public class ChatRoomService {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 监听聊天室动态
+	 * */
+	public void listenPresence(MultiUserChat muc){
+		//muc.addUserStatusListener(listener);
+	}
+	
 }

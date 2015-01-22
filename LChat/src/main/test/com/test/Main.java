@@ -1,30 +1,40 @@
 package com.test;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
+import org.jivesoftware.smack.SASLAuthentication;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.tcp.XMPPTCPConnection;
+import org.jivesoftware.smackx.pubsub.LeafNode;
+import org.jivesoftware.smackx.pubsub.PayloadItem;
+import org.jivesoftware.smackx.pubsub.PubSubManager;
+import org.jivesoftware.smackx.pubsub.SimplePayload;
 
 
 public class Main {
 public static void main(String[] args) {
 
-     BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
-       BufferedWriter bufw = new BufferedWriter(new OutputStreamWriter(System.out));
-     System.out.println("请输入任意字母并按回车键：");
-     String line =null;
-     try {
-		while((line=bufr.readLine())!=null)    {
-		     if("over".equals(line))            //判断输入over，就结束循环
-		         break;
-		     bufw.write(line.toUpperCase());  
-		     bufw.newLine();                    //换行 
-		     bufw.flush();                      //刷新
-		    }
-		  bufw.close();                          //关闭 
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
+
+	ConnectionConfiguration config = new ConnectionConfiguration("localhost.localdomain", 5222);
+	config.setSecurityMode(SecurityMode.disabled);
+	SASLAuthentication.supportSASLMechanism("PLAIN", 0);
+	XMPPConnection	connection = new XMPPTCPConnection(config);
+	try {
+		connection.connect();
+		connection.login("555", "555");
+	
+		PubSubManager pub = new PubSubManager(connection);
+		LeafNode node = pub.getNode("123");
+		if(node==null){
+			node = pub.createNode("123");
+		}
+		 String msg = "发布消息";  
+         
+         SimplePayload payload = new SimplePayload("message","pubsub:test:message", "<message xmlns='pubsub:test:message'><body>"+msg+"</body></message>");  
+         PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>("5", payload);  
+
+		node.publish(item);
+	} catch (Exception e) {
 		e.printStackTrace();
 	}
 }

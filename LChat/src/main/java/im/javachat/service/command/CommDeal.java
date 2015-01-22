@@ -58,7 +58,8 @@ public class CommDeal {
 			break;
 		//加入聊天室	
 		case "join":
-			new ChatRoomService().joinRoom(comm);
+			if(comm.length == 2)
+				new ChatRoomService().joinRoom(comm[1]);
 			break;
 		//创建聊天室
 		case "create":

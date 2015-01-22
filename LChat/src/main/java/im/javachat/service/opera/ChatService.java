@@ -1,13 +1,12 @@
 package im.javachat.service.opera;
 
 
-import java.util.Collection;
-import java.util.Date;
-
 import im.javachat.entity.MyMessage;
 import im.javachat.service.GlobalVar.GlobalVar;
 import im.javachat.tool.DateTool;
 import im.javachat.tool.XmlTool;
+
+import java.util.Collection;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;
@@ -105,24 +104,11 @@ public class ChatService {
 			}
 		}); 
 	}
-
-	
-	/**
-	 * 监听聊天室中人员的进出
-	 * */
-	public void listenPresence(MultiUserChat muc){
-		//muc.addUserStatusListener(listener);
-	}
 	
 	public void test(){
 		try {
-			/*Message me= new Message();
-			me.setBody("123");
-			me.setFrom("111@localhost.localdomain");
-			me.setTo("test@localhost.localdomain");
-			me.s*/
 			GlobalVar.connection.sendPacket(new MyMessage());
-		} catch (NotConnectedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
