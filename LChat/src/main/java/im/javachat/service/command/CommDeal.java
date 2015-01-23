@@ -7,7 +7,6 @@ import im.javachat.controll.FriendControll;
 import im.javachat.controll.HelpControll;
 import im.javachat.service.opera.ChatRoomService;
 import im.javachat.service.opera.ChatService;
-import im.javachat.service.opera.FriendService;
 import im.javachat.service.opera.LoginService;
 
 /**
@@ -51,6 +50,12 @@ public class CommDeal {
 		// 发送消息
 		case "send":
 			new ChatControll().sendMessage(comm);
+			break;
+		case "revoke":
+			new ChatRoomControll().revokevoice(comm);
+			break;
+		case "grant":
+			new ChatRoomControll().grantvoice(comm);
 			break;
 		case "exit":
 			new LoginService().loginout();

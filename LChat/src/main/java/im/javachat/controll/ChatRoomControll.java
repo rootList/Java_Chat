@@ -63,6 +63,62 @@ public class ChatRoomControll {
 	}
 	
 	/**
+	 *禁用指定用户权限
+	 * */
+	public void revokevoice(String ...revoke){
+		if(revoke.length!=3){
+			InputCommand.printerrorcommand();
+			return;
+		}
+		if(!StringTool.verifyJid(revoke[2])){
+			InputCommand.printerrorjid();
+			return;
+		}
+		String roomjid = GlobalVar.directory.getDirecStack().lastElement();
+		switch (revoke[1]) {
+		case "voice":
+			new ChatRoomService().shutupUser(revoke[2], roomjid);
+			break;
+		case "admin":
+			
+			break;
+		default:
+			break;
+		}
+		
+		
+	} 
+	
+	/**
+	 * 赋予指定用户权限
+	 * */
+	public void grantvoice(String ...revoke){
+		if(revoke.length!=3){
+			InputCommand.printerrorcommand();
+			return;
+		}
+		if(!StringTool.verifyJid(revoke[2])){
+			InputCommand.printerrorjid();
+			return;
+		}
+		String roomjid = GlobalVar.directory.getDirecStack().lastElement();
+		switch (revoke[1]) {
+		//授予发言权
+		case "voice":
+			new ChatRoomService().grantVoice(revoke[2], roomjid);
+			break;
+		//授予管理权	
+		case "admin":
+			
+				break;
+		default:
+			break;
+		}
+		
+		
+	} 
+	
+	/**
 	 * 邀请指定人员加入聊天室
 	 * @param comm[1] 聊天室jid
 	 * @param comm[2] 用户jid

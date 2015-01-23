@@ -219,4 +219,42 @@ public class ChatRoomService {
 		//muc.addUserStatusListener(listener);
 	}
 	
+	/**
+	 * 禁止指定用户发言
+	 * @param userjid 用户jid
+	 * */
+	public void shutupUser(String userjid,String roomjid){
+		MultiUserChat muc = GlobalVar.chatroom.get(roomjid);
+		try {
+			muc.revokeVoice(userjid);
+		} catch (XMPPErrorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoResponseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotConnectedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 赋予指定用户发言权
+	 * */
+	public void grantVoice(String userjid,String roomjid){
+		MultiUserChat muc = GlobalVar.chatroom.get(roomjid);
+		try {
+			muc.grantVoice(userjid);
+		} catch (XMPPErrorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoResponseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotConnectedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
