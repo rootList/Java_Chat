@@ -3,20 +3,12 @@ package im.javachat.controll;
 import im.javachat.service.GlobalVar.GlobalVar;
 import im.javachat.service.command.InputCommand;
 import im.javachat.service.opera.ChatService;
-import im.javachat.tool.DateTool;
 import im.javachat.tool.StringTool;
 
-import org.apache.commons.lang.StringUtils;
-import org.jivesoftware.smack.PacketListener;
-import org.jivesoftware.smack.SmackException;
-import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
-import org.jivesoftware.smack.XMPPException.XMPPErrorException;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Message.Type;
-import org.jivesoftware.smack.packet.Packet;
-import org.jivesoftware.smackx.muc.DefaultParticipantStatusListener;
-import org.jivesoftware.smackx.muc.MultiUserChat;
+
 
 
 /**

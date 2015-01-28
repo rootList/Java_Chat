@@ -13,8 +13,8 @@ import org.jivesoftware.smackx.pubsub.SimplePayload;
 
 public class Main {
 public static void main(String[] args) {
-
-
+System.out.println(Runtime.getRuntime().availableProcessors());
+/*
 	ConnectionConfiguration config = new ConnectionConfiguration("localhost.localdomain", 5222);
 	config.setSecurityMode(SecurityMode.disabled);
 	SASLAuthentication.supportSASLMechanism("PLAIN", 0);
@@ -36,6 +36,6 @@ public static void main(String[] args) {
 		node.publish(item);
 	} catch (Exception e) {
 		e.printStackTrace();
-	}
+	}*/
 }
 }

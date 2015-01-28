@@ -52,10 +52,10 @@ public class CommDeal {
 			new ChatControll().sendMessage(comm);
 			break;
 		case "revoke":
-			new ChatRoomControll().revokevoice(comm);
+			new ChatRoomControll().revoke(comm);
 			break;
 		case "grant":
-			new ChatRoomControll().grantvoice(comm);
+			new ChatRoomControll().grant(comm);
 			break;
 		case "exit":
 			new LoginService().loginout();

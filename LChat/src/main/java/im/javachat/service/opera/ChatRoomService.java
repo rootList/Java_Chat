@@ -240,12 +240,71 @@ public class ChatRoomService {
 	}
 	
 	/**
+	 * 取消指定用户管理员权限
+	 * @param userjid 用户jid
+	 * */
+	public void revokeAdmin(String userjid,String roomjid){
+		MultiUserChat muc = GlobalVar.chatroom.get(roomjid);
+		try {
+			muc.revokeAdmin(userjid);
+		} catch (XMPPErrorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoResponseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotConnectedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * 授予指定用户管理员权限
+	 * */
+	public void grantAdmin(String userjid,String roomjid){
+		MultiUserChat muc = GlobalVar.chatroom.get(roomjid);
+		try {
+			muc.grantAdmin(userjid);
+		} catch (XMPPErrorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoResponseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotConnectedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * 赋予指定用户发言权
 	 * */
 	public void grantVoice(String userjid,String roomjid){
 		MultiUserChat muc = GlobalVar.chatroom.get(roomjid);
 		try {
 			muc.grantVoice(userjid);
+		} catch (XMPPErrorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoResponseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotConnectedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 授予用户加入聊天室的权限
+	 * */
+	public void grantEntry(String userjid,String roomjid){
+		MultiUserChat muc = GlobalVar.chatroom.get(roomjid);
+		try {
+			muc.grantMembership(userjid);
 		} catch (XMPPErrorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

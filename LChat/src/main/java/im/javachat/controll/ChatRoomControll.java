@@ -65,7 +65,7 @@ public class ChatRoomControll {
 	/**
 	 *禁用指定用户权限
 	 * */
-	public void revokevoice(String ...revoke){
+	public void revoke(String ...revoke){
 		if(revoke.length!=3){
 			InputCommand.printerrorcommand();
 			return;
@@ -80,7 +80,7 @@ public class ChatRoomControll {
 			new ChatRoomService().shutupUser(revoke[2], roomjid);
 			break;
 		case "admin":
-			
+			new ChatRoomService().revokeAdmin(revoke[2], roomjid);
 			break;
 		default:
 			break;
@@ -92,7 +92,7 @@ public class ChatRoomControll {
 	/**
 	 * 赋予指定用户权限
 	 * */
-	public void grantvoice(String ...revoke){
+	public void grant(String ...revoke){
 		if(revoke.length!=3){
 			InputCommand.printerrorcommand();
 			return;
@@ -109,8 +109,11 @@ public class ChatRoomControll {
 			break;
 		//授予管理权	
 		case "admin":
-			
-				break;
+			new ChatRoomService().grantAdmin(revoke[2], roomjid);
+			break;
+		case "entry":
+			new ChatRoomService().grantEntry(revoke[2], roomjid); 
+			break;
 		default:
 			break;
 		}
